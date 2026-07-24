@@ -3,6 +3,7 @@ package com.thiagofonseca.taskmanager.service;
 import com.thiagofonseca.taskmanager.model.Task;
 import com.thiagofonseca.taskmanager.repository.TaskRepository;
 import org.springframework.stereotype.Service;
+import com.thiagofonseca.taskmanager.exception.TaskNotFoundException;
 
 import java.util.List;
 
@@ -30,7 +31,9 @@ public class TaskService {
     public Task update(Long id, Task task) {
 
     Task existing = repository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Tarefa não encontrada"));
+            .orElseThrow(() ->
+    new TaskNotFoundException("Tarefa não encontrada")
+);
 
     existing.setTitle(task.getTitle());
     existing.setCompleted(task.isCompleted());
