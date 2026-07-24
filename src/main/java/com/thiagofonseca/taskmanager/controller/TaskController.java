@@ -40,4 +40,13 @@ public class TaskController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+public Task update(
+        @PathVariable Long id,
+        @Valid @RequestBody Task task
+) {
+
+    return service.update(id, task);
+  }
 }
